@@ -11,6 +11,12 @@
 
  Route::get('/', [UsersController::class, 'index']);
 
+
+
+```
+
+```php
+
  php artisan make:controller ContactController
 
 ```
