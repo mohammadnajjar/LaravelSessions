@@ -26,6 +26,8 @@
 ## Single Action Controllers
 
 If a controller action is particularly complex, you might find it convenient to dedicate an entire controller class to that single action. To accomplish this, you may define a single `__invoke` method within the controller:
+بنفذ بس تابع \_\_invoke
+ومابيقبل أي تابع غيرو
 
 ```php
   public function __invoke()
@@ -52,6 +54,9 @@ Route::get('profile', [UserController::class, 'show'])->middleware('auth');
 
 Or, you may find it convenient to specify middleware within your controller's constructor. Using the `middleware` method within your controller's constructor, you can assign middleware to the controller's actions:
 
+بعملها في Controller
+لأني إذا بدي اعملها بالراوت بدي اعمل لكل تابع Middleware
+
 ```php
  public function __construct()
     {
@@ -66,6 +71,11 @@ Or, you may find it convenient to specify middleware within your controller's co
 ## [Resource Controllers](https://laravel.com/docs/8.x/controllers#resource-controllers)
 
 Because of this common use case, Laravel resource routing assigns the typical create, read, update, and delete ("CRUD") routes to a controller with a single line of code. To get started, we can use the `make:controller` Artisan command's `--resource` option to quickly create a controller to handle these actions:
+
+بنشألي لحالو توابع create, read, update, and delete
+إذا بدي ضيف تابع زيادة لل resource
+بكتب الراوت تبعه قبل تعريف ال resource
+ومابصير يكون نفس URL
 
 ```php
 
