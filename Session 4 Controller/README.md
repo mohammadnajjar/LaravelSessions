@@ -70,9 +70,13 @@ Because of this common use case, Laravel resource routing assigns the typical cr
 ```php
 
 Route::resource('photos', PhotoController::class);
+```
+
+```php
 
 php artisan make:controller PhotoController --resource
 php artisan make:Controller UsersController -r
+
 ```
 
 You may even register many resource controllers at once by passing an array to the `resources` method:
