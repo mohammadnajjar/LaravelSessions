@@ -1,0 +1,195 @@
+========================== Code Mora Soft ===================================
+composer create-project --prefer-dist laravel/laravel Hospital
+تحميل نسخة لارفيل عن طريق الكمبوزر
+---------------------------------------------------
+php artisan  serve
+تشغيل سيرفر لارفيل
+---------------------------------------------------
+php artisan make:controller ContactController
+
+انشاء كنترول
+---------------------------------------------------
+php artisan make:controller RoleController --resource
+
+composer create-project --prefer-dist laravel/laravel 7 project
+
+------------------------------------------------
+Requset Validation
+
+php artisan make:request InvoicesValidation 
+------------------------------------------------
+
+php artisan make:notification add_invoice
+php artisan make:notification InvoicePaid
+
+composer require consoletvs/charts:5.*
+
+
+انشاء كنترول ريسورس
+Route::resource('photos', 'PhotoController');
+---------------------------------------------------
+php artisan make:model doctors -mcr
+انشاء كنترولار مجمع 
+---------------------------------------------------
+
+Route::get('name','controller@fun');
+عمل روت علي صفحة
+---------------------------------------------------
+public function  home(){
+return view(page name,compact('var name'));
+}
+انشاء فنكشن
+----------------------------------------------------
+public function __invoke($id){
+return view(page name,compact('var name'));}
+ انشاء فنكشن وحيد
+----------------------------------------------------
+@extends('pages.master')
+استدعاء صفحة الماستر
+----------------------------------------------------
+@yield("name")
+تسمية الحقل المراد التعديل فية فى كل صفحة جديد
+----------------------------------------------------
+@section('content')@stop
+استدعاء اسمة الحقل المراد التعديل علية
+----------------------------------------------------
+{{csrf_field()}}
+كود حماية الفورم
+----------------------------------------------------
+php artisan make:migration create_Doctor_Appointment_table --create=Doctor_Appointment
+كود انشاء جدول فى قاعدة البيانات
+-----------------------------------------------------
+php artisan make:model posts_model
+كود انشاء المديول الخاص بالجدول
+------------------------------------------------------
+php artisan make:migration add_votes_to_categories_table --table=categories
+كود اضافة حقل بعد انشاء الجدول
+------------------------------------------------------
+كود مسح كل الجداول من قاعدة البيانات
+php artisan migrate:fresh
+------------------------------------------------------
+php artisan migrate
+
+Route::get('admin', [AdminController::class, 'xx']);
+
+
+كود التاكيد علي انشاء الجدول
+------------------------------------------------------
+php artisan migrate:rollback
+كود حذف اخر جدول تم انشاءه
+------------------------------------------------------
+
+
+php artisan db:seed --class=PermissionTableSeeder
+php artisan db:seed --class=CreateAdminUserSeeder
+
+morasoft_doctorydb
+
+public function(Request $request){
+
+}
+فنكشن كود الحفظ
+------------------------------------------------------
+$var  =new model;
+بداية كود الحفظ تعريف اسمة المديول 
+------------------------------------------------------
+var->fieldname=$request->input name
+طريقة كتابة المتغيرات فى كود الحفظ
+------------------------------------------------------
+return redirect('show');
+العود مباشرة الي الصفحة المطلوبة
+------------------------------------------------------
+checkbox
+var->fieldname=implode("-",$request->input name);
+طريقة حفظ تشيك بوكس
+------------------------------------------------------
+file
+$var=$request->file('input')
+$var2=$var->getClientOriginalName();
+طريقة تعريف الصورة
+-------------------------------------------------------
+$varpic->move('folder','var2')
+طريقة نقل الصورة
+-------------------------------------------------------
+$varmodel->save();
+كود حفظ البيانات
+-------------------------------------------------------
+use Illuminate\Support\Facades\DB;
+فى حالة العرض كتابة الكود اعلي الكنترولر
+-------------------------------------------------------
+$varname=DB::table('table name')->get();
+جملة select
+-------------------------------------------------------
+return view('page',compact('varname'));
+العودة بشاشة العرض مع المتغير
+-------------------------------------------------------
+@foreach($var name as $var)
+{{$var->field name}}
+@endforeach
+جملة الفور اتش
+-------------------------------------------------------
+validation
+لينك التحقق فى لارفيل
+https://laravel.com/docs/5.8/validation#available-validation-rules
+-------------------------------------------------------
+<a href="{{$row->id}}/delete">delet</a> كود زر الحذف
+Route::get('{id}/delete','con1@delete'); روت الحذف
+function delete(model $adid){$adid->delete();}
+--------------------------------------------------------
+<a href="{{id}}/edit">edit</a> كود زر التعديل
+Route::get('{adid}/edit','con1@edut'); روت التعديل
+function edit(model $adid){return view('update',compact('adid'));}
+---------------------------------------------------------
+form  action =update  صفحة عرض البيانات للتعديل
+{{csrf_field()}}
+Route::post('{adid}/update','con1@update'); روت التعديل
+function update(model $adid,Request $request){
+
+$adid>update($request->all()); الطريقة الاولي تعديل الكل
+
+DB::table('table name')->where('id',$adid->id)
+->update(['field name'=>$request->input name]) الطريقة الثاني
+
+}
+---------------------------------------------------------
+protected $fillable = [
+        'username', 'email', 'password',
+    ];
+كود سماح التعديل داخل المديول
+
+protected $table="nametable";
+كود ربط الجدول بالموديل
+
+----------------------------------------------------------
+php artisan make:auth
+كود انشاء نظام الدخول
+----------------------------------------------------------
+$request->session()->put(['name'=>'html-php']);
+             
+session()->put(['names'=>['ahmed','20','html']])  ; 
+كود فتح السيشن
+----------------------------------------------------------
+session()->get('');
+عرض السيشن
+-----------------------------------------------------------
+ session()->forget('key');
+ session()->flush();
+غلق السيشن
+-----------------------------------------------------------
+artisan make:middleware name
+كود انشاء ميدلوير
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+@auth
+@endauth
+كود التاكد من عملية تسجيل الدخول 
+-----------------------------------------------------------
+            
+-----------------------------------------------------------
+@guest
+@endguest
+كود الدخول زائر
+-----------------------------------------------------------
+use Illuminate\Support\Facades\Schema;
+Schema::defaultStringLength(191);
