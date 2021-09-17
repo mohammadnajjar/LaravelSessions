@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>README</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="database-migrations">Database: Migrations</h1>
+<h2 id="introduction"><a href="https://laravel.com/docs/8.x/migrations#introduction">Introduction</a></h2>
+<p>Migrations are like version control for your database, allowing your team to define and share the application’s database schema definition. If you have ever had to tell a teammate to manually add a column to their local database schema after pulling in your changes from source control, you’ve faced the problem that database migrations solve.</p>
+<p>The Laravel  <code>Schema</code>  <a href="https://laravel.com/docs/8.x/facades">facade</a>  provides database agnostic support for creating and manipulating tables across all of Laravel’s supported database systems. Typically, migrations will use this facade to create and modify database tables and columns.</p>
+<hr>
+<h2 id="generating-migrations"><a href="https://laravel.com/docs/8.x/migrations#generating-migrations">Generating Migrations</a></h2>
+<pre class=" language-php"><code class="prism  language-php">php artisan make<span class="token punctuation">:</span>migration create_flights_table
+</code></pre>
+<hr>
+<h2 id="migration-structure"><a href="https://laravel.com/docs/8.x/migrations#migration-structure">Migration Structure</a></h2>
+<p>A migration class contains two methods:  <code>up</code>  and  <code>down</code>. The  <code>up</code>  method is used to add new tables, columns, or indexes to your database, while the  <code>down</code>  method should reverse the operations performed by the  <code>up</code>  method.</p>
+<hr>
+<h2 id="running-migrations"><a href="https://laravel.com/docs/8.x/migrations#running-migrations">Running Migrations</a></h2>
+<p>To run all of your outstanding migrations, execute the  <code>migrate</code>  Artisan command:</p>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate
+</code></pre>
+<p>If you would like to see which migrations have run thus far, you may use the  <code>migrate:status</code>  Artisan command:</p>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate<span class="token punctuation">:</span>status
+</code></pre>
+<h4 id="forcing-migrations-to-run-in-production"><a href="https://laravel.com/docs/8.x/migrations#forcing-migrations-to-run-in-production">Forcing Migrations To Run In Production</a></h4>
+<p>Some migration operations are destructive, which means they may cause you to lose data. In order to protect you from running these commands against your production database, you will be prompted for confirmation before the commands are executed. To force the commands to run without a prompt, use the  <code>--force</code>  flag:</p>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate <span class="token operator">--</span>force
+</code></pre>
+<h3 id="rolling-back-migrations"><a href="https://laravel.com/docs/8.x/migrations#rolling-back-migrations">Rolling Back Migrations</a></h3>
+<p>To roll back the latest migration operation, you may use the  <code>rollback</code>  Artisan command. This command rolls back the last “batch” of migrations, which may include multiple migration files:</p>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate<span class="token punctuation">:</span>rollback
+</code></pre>
+<p>You may roll back a limited number of migrations by providing the  <code>step</code>  option to the  <code>rollback</code>  command. For example, the following command will roll back the last five migrations:</p>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate<span class="token punctuation">:</span>rollback <span class="token operator">--</span>step<span class="token operator">=</span><span class="token number">5</span>
+</code></pre>
+<p>The  <code>migrate:reset</code>  command will roll back all of your application’s migrations:</p>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate<span class="token punctuation">:</span>reset
+</code></pre>
+<h4 id="roll-back--migrate-using-a-single-command"><a href="https://laravel.com/docs/8.x/migrations#roll-back-migrate-using-a-single-command">Roll Back &amp; Migrate Using A Single Command</a></h4>
+<p>The  <code>migrate:refresh</code>  command will roll back all of your migrations and then execute the  <code>migrate</code>  command. This command effectively re-creates your entire database:</p>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate<span class="token punctuation">:</span>refresh
+
+<span class="token comment">// Refresh the database and run all database seeds...</span>
+php artisan migrate<span class="token punctuation">:</span>refresh <span class="token operator">--</span>seed
+</code></pre>
+<p>You may roll back and re-migrate a limited number of migrations by providing the  <code>step</code>  option to the  <code>refresh</code>  command. For example, the following command will roll back and re-migrate the last five migrations:</p>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate<span class="token punctuation">:</span>refresh <span class="token operator">--</span>step<span class="token operator">=</span><span class="token number">5</span>
+</code></pre>
+<h4 id="drop-all-tables--migrate"><a href="https://laravel.com/docs/8.x/migrations#drop-all-tables-migrate">Drop All Tables &amp; Migrate</a></h4>
+<p>The  <code>migrate:fresh</code>  command will drop all tables from the database and then execute the  <code>migrate</code>  command:</p>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate<span class="token punctuation">:</span>fresh
+php artisan mi<span class="token punctuation">:</span>f
+php artisan migrate<span class="token punctuation">:</span>fresh <span class="token operator">--</span>seed
+</code></pre>
+<hr>
+<h2 id="tables"><a href="https://laravel.com/docs/8.x/migrations#tables">Tables</a></h2>
+<h3 id="creating-tables"><a href="https://laravel.com/docs/8.x/migrations#creating-tables">Creating Tables</a></h3>
+<p>To create a new database table, use the  <code>create</code>  method on the  <code>Schema</code>  facade. The  <code>create</code>  method accepts two arguments: the first is the name of the table, while the second is a closure which receives a  <code>Blueprint</code>  object that may be used to define the new table:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Schema<span class="token punctuation">\</span>Blueprint</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>Schema</span><span class="token punctuation">;</span>
+
+Schema<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>Blueprint <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">id</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">timestamps</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>When creating the table, you may use any of the schema builder’s  <a href="https://laravel.com/docs/8.x/migrations#creating-columns">column methods</a>  to define the table’s columns.</p>
+<h4 id="checking-for-table--column-existence"><a href="https://laravel.com/docs/8.x/migrations#checking-for-table-column-existence">Checking For Table / Column Existence</a></h4>
+<p>You may check for the existence of a table or column using the  <code>hasTable</code>  and  <code>hasColumn</code>  methods:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token keyword">if</span> <span class="token punctuation">(</span>Schema<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">hasTable</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// The "users" table exists...</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>Schema<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">hasColumn</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">,</span> <span class="token string">'email'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// The "users" table exists and has an "email" column...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="updating-tables"><a href="https://laravel.com/docs/8.x/migrations#updating-tables">Updating Tables</a></h3>
+<p>The  <code>table</code>  method on the  <code>Schema</code>  facade may be used to update existing tables. Like the  <code>create</code>  method, the  <code>table</code>  method accepts two arguments: the name of the table and a closure that receives a  <code>Blueprint</code>  instance you may use to add columns or indexes to the table:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Schema<span class="token punctuation">\</span>Blueprint</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>Schema</span><span class="token punctuation">;</span>
+
+Schema<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>Blueprint <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">integer</span><span class="token punctuation">(</span><span class="token string">'votes'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+<h2 id="columns"><a href="https://laravel.com/docs/8.x/migrations#columns">Columns</a></h2>
+<h3 id="available-column-types"><a href="https://laravel.com/docs/8.x/migrations#available-column-types">Available Column Types</a></h3>
+<p>The schema builder blueprint offers a variety of methods that correspond to the different types of columns you can add to your database tables. Each of the available methods are listed in the table below:</p>
+<h4 id="boolean"><a href="https://laravel.com/docs/8.x/migrations#column-method-boolean"><code>boolean()</code></a></h4>
+<p>The  <code>boolean</code>  method creates a  <code>BOOLEAN</code>  equivalent column:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">boolean</span><span class="token punctuation">(</span><span class="token string">'confirmed'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="char"><a href="https://laravel.com/docs/8.x/migrations#column-method-char"><code>char()</code></a></h4>
+<p>The  <code>char</code>  method creates a  <code>CHAR</code>  equivalent column with of a given length:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">char</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="enum"><a href="https://laravel.com/docs/8.x/migrations#column-method-enum"><code>enum()</code></a></h4>
+<p>The  <code>enum</code>  method creates a  <code>ENUM</code>  equivalent column with the given valid values:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">enum</span><span class="token punctuation">(</span><span class="token string">'difficulty'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'easy'</span><span class="token punctuation">,</span> <span class="token string">'hard'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="double"><a href="https://laravel.com/docs/8.x/migrations#column-method-double"><code>double()</code></a></h4>
+<p>The  <code>double</code>  method creates a  <code>DOUBLE</code>  equivalent column with the given precision (total digits) and scale (decimal digits):</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">double</span><span class="token punctuation">(</span><span class="token string">'amount'</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="float"><a href="https://laravel.com/docs/8.x/migrations#column-method-float"><code>float()</code></a></h4>
+<p>The  <code>float</code>  method creates a  <code>FLOAT</code>  equivalent column with the given precision (total digits) and scale (decimal digits):</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">float</span><span class="token punctuation">(</span><span class="token string">'amount'</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="foreignid"><a href="https://laravel.com/docs/8.x/migrations#column-method-foreignId"><code>foreignId()</code></a></h4>
+<p>The  <code>foreignId</code>  method creates an  <code>UNSIGNED BIGINT</code>  equivalent column:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">foreignId</span><span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="id"><a href="https://laravel.com/docs/8.x/migrations#column-method-id"><code>id()</code></a></h4>
+<p>The  <code>id</code>  method is an alias of the  <code>bigIncrements</code>  method. By default, the method will create an  <code>id</code>  column; however, you may pass a column name if you would like to assign a different name to the column:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">id</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="integer"><a href="https://laravel.com/docs/8.x/migrations#column-method-integer"><code>integer()</code></a></h4>
+<p>The  <code>integer</code>  method creates an  <code>INTEGER</code>  equivalent column:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">integer</span><span class="token punctuation">(</span><span class="token string">'votes'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="longtext"><a href="https://laravel.com/docs/8.x/migrations#column-method-longText"><code>longText()</code></a></h4>
+<p>The  <code>longText</code>  method creates a  <code>LONGTEXT</code>  equivalent column:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">longText</span><span class="token punctuation">(</span><span class="token string">'description'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="remembertoken"><a href="https://laravel.com/docs/8.x/migrations#column-method-rememberToken"><code>rememberToken()</code></a></h4>
+<p>The  <code>rememberToken</code>  method creates a nullable,  <code>VARCHAR(100)</code>  equivalent column that is intended to store the current “remember me”  <a href="https://laravel.com/docs/8.x/authentication#remembering-users">authentication token</a>:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">rememberToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="softdeletes"><a href="https://laravel.com/docs/8.x/migrations#column-method-softDeletes"><code>softDeletes()</code></a></h4>
+<p>The  <code>softDeletes</code>  method adds a nullable  <code>deleted_at</code>  <code>TIMESTAMP</code>  equivalent column with an optional precision (total digits). This column is intended to store the  <code>deleted_at</code>  timestamp needed for Eloquent’s “soft delete” functionality:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">softDeletes</span><span class="token punctuation">(</span><span class="token variable">$column</span> <span class="token operator">=</span> <span class="token string">'deleted_at'</span><span class="token punctuation">,</span> <span class="token variable">$precision</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="string"><a href="https://laravel.com/docs/8.x/migrations#column-method-string"><code>string()</code></a></h4>
+<p>The  <code>string</code>  method creates a  <code>VARCHAR</code>  equivalent column of the given length:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="text"><a href="https://laravel.com/docs/8.x/migrations#column-method-text"><code>text()</code></a></h4>
+<p>The  <code>text</code>  method creates a  <code>TEXT</code>  equivalent column:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">'description'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="timestamps"><a href="https://laravel.com/docs/8.x/migrations#column-method-timestamps"><code>timestamps()</code></a></h4>
+<p>The  <code>timestamps</code>  method creates  <code>created_at</code>  and  <code>updated_at</code>  <code>TIMESTAMP</code>  equivalent columns with an optional precision (total digits):</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">timestamps</span><span class="token punctuation">(</span><span class="token variable">$precision</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="year"><a href="https://laravel.com/docs/8.x/migrations#column-method-year"><code>year()</code></a></h4>
+<p>The  <code>year</code>  method creates a  <code>YEAR</code>  equivalent column:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">year</span><span class="token punctuation">(</span><span class="token string">'birth_year'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="datetime"><a href="https://laravel.com/docs/8.x/migrations#column-method-dateTime"><code>dateTime()</code></a></h4>
+<p>The  <code>dateTime</code>  method creates a  <code>DATETIME</code>  equivalent column with an optional precision (total digits):</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">dateTime</span><span class="token punctuation">(</span><span class="token string">'created_at'</span><span class="token punctuation">,</span> <span class="token variable">$precision</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="date"><a href="https://laravel.com/docs/8.x/migrations#column-method-date"><code>date()</code></a></h4>
+<p>The  <code>date</code>  method creates a  <code>DATE</code>  equivalent column:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">date</span><span class="token punctuation">(</span><span class="token string">'created_at'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+<h3 id="column-modifiers"><a href="https://laravel.com/docs/8.x/migrations#column-modifiers">Column Modifiers</a></h3>
+<p>In addition to the column types listed above, there are several column “modifiers” you may use when adding a column to a database table. For example, to make the column “nullable”, you may use the  <code>nullable</code>  method:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Schema<span class="token punctuation">\</span>Blueprint</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>Schema</span><span class="token punctuation">;</span>
+
+Schema<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>Blueprint <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">nullable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The following table contains all of the available column modifiers. This list does not include  <a href="https://laravel.com/docs/8.x/migrations#creating-indexes">index modifiers</a>:</p>
+
+<table>
+<thead>
+<tr>
+<th>Modifier</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-&gt;after('column')</code></td>
+<td>Place the column “after” another column (MySQL).</td>
+</tr>
+<tr>
+<td><code>-&gt;autoIncrement()</code></td>
+<td>Set INTEGER columns as auto-incrementing (primary key).</td>
+</tr>
+<tr>
+<td><code>-&gt;charset('utf8mb4')</code></td>
+<td>Specify a character set for the column (MySQL).</td>
+</tr>
+<tr>
+<td><code>-&gt;collation('utf8mb4_unicode_ci')</code></td>
+<td>Specify a collation for the column (MySQL/PostgreSQL/SQL Server).</td>
+</tr>
+<tr>
+<td><code>-&gt;comment('my comment')</code></td>
+<td>Add a comment to a column (MySQL/PostgreSQL).</td>
+</tr>
+<tr>
+<td><code>-&gt;default($value)</code></td>
+<td>Specify a “default” value for the column.</td>
+</tr>
+<tr>
+<td><code>-&gt;first()</code></td>
+<td>Place the column “first” in the table (MySQL).</td>
+</tr>
+<tr>
+<td><code>-&gt;from($integer)</code></td>
+<td>Set the starting value of an auto-incrementing field (MySQL / PostgreSQL).</td>
+</tr>
+<tr>
+<td><code>-&gt;nullable($value = true)</code></td>
+<td>Allow NULL values to be inserted into the column.</td>
+</tr>
+<tr>
+<td><code>-&gt;storedAs($expression)</code></td>
+<td>Create a stored generated column (MySQL).</td>
+</tr>
+<tr>
+<td><code>-&gt;unsigned()</code></td>
+<td>Set INTEGER columns as UNSIGNED (MySQL).</td>
+</tr>
+<tr>
+<td><code>-&gt;useCurrent()</code></td>
+<td>Set TIMESTAMP columns to use CURRENT_TIMESTAMP as default value.</td>
+</tr>
+<tr>
+<td><code>-&gt;useCurrentOnUpdate()</code></td>
+<td>Set TIMESTAMP columns to use CURRENT_TIMESTAMP when a record is updated.</td>
+</tr>
+<tr>
+<td><code>-&gt;virtualAs($expression)</code></td>
+<td>Create a virtual generated column (MySQL).</td>
+</tr>
+<tr>
+<td><code>-&gt;generatedAs($expression)</code></td>
+<td>Create an identity column with specified sequence options (PostgreSQL).</td>
+</tr>
+<tr>
+<td><code>-&gt;always()</code></td>
+<td>Defines the precedence of sequence values over input for an identity column (PostgreSQL).</td>
+</tr>
+</tbody>
+</table><hr>
+<h3 id="creating-indexes"><a href="https://laravel.com/docs/8.x/migrations#creating-indexes">Creating Indexes</a></h3>
+<p>The Laravel schema builder supports several types of indexes. The following example creates a new  <code>email</code>  column and specifies that its values should be unique. To create the index, we can chain the  <code>unique</code>  method onto the column definition:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Schema<span class="token punctuation">\</span>Blueprint</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>Schema</span><span class="token punctuation">;</span>
+
+Schema<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>Blueprint <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">unique</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Alternatively, you may create the index after defining the column. To do so, you should call the  <code>unique</code>  method on the schema builder blueprint. This method accepts the name of the column that should receive a unique index:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">unique</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>You may even pass an array of columns to an index method to create a compound (or composite) index:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'account_id'</span><span class="token punctuation">,</span> <span class="token string">'created_at'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>When creating an index, Laravel will automatically generate an index name based on the table, column names, and the index type, but you may pass a second argument to the method to specify the index name yourself:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">unique</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">,</span> <span class="token string">'unique_email'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="available-index-types"><a href="https://laravel.com/docs/8.x/migrations#available-index-types">Available Index Types</a></h4>
+<p>Laravel’s schema builder blueprint class provides methods for creating each type of index supported by Laravel. Each index method accepts an optional second argument to specify the name of the index. If omitted, the name will be derived from the names of the table and column(s) used for the index, as well as the index type. Each of the available index methods is described in the table below:</p>
+
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$table-&gt;primary('id');</code></td>
+<td>Adds a primary key.</td>
+</tr>
+<tr>
+<td><code>$table-&gt;primary(['id', 'parent_id']);</code></td>
+<td>Adds composite keys.</td>
+</tr>
+<tr>
+<td><code>$table-&gt;unique('email');</code></td>
+<td>Adds a unique index.</td>
+</tr>
+<tr>
+<td><code>$table-&gt;index('state');</code></td>
+<td>Adds an index.</td>
+</tr>
+<tr>
+<td><code>$table-&gt;spatialIndex('location');</code></td>
+<td>Adds a spatial index (except SQLite).</td>
+</tr>
+</tbody>
+</table><hr>
+<h3 id="foreign-key-constraints"><a href="https://laravel.com/docs/8.x/migrations#foreign-key-constraints">Foreign Key Constraints</a></h3>
+<p>Laravel also provides support for creating foreign key constraints, which are used to force referential integrity at the database level. For example, let’s define a  <code>user_id</code>  column on the  <code>posts</code>  table that references the  <code>id</code>  column on a  <code>users</code>  table:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Schema<span class="token punctuation">\</span>Blueprint</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>Schema</span><span class="token punctuation">;</span>
+
+Schema<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">'posts'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>Blueprint <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">unsignedBigInteger</span><span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">foreign</span><span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">references</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Since this syntax is rather verbose, Laravel provides additional, terser methods that use conventions to provide a better developer experience. When using the  <code>foreignId</code>  method to create your column, the example above can be rewritten like so:</p>
+<pre class=" language-php"><code class="prism  language-php">Schema<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">'posts'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>Blueprint <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">foreignId</span><span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">constrained</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The  <code>foreignId</code>  method creates an  <code>UNSIGNED BIGINT</code>  equivalent column, while the  <code>constrained</code>  method will use conventions to determine the table and column name being referenced. If your table name does not match Laravel’s conventions, you may specify the table name by passing it as an argument to the  <code>constrained</code>  method:</p>
+<pre class=" language-php"><code class="prism  language-php">Schema<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">'posts'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>Blueprint <span class="token variable">$table</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">foreignId</span><span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">constrained</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>You may also specify the desired action for the “on delete” and “on update” properties of the constraint:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">foreignId</span><span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">)</span>
+      <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">constrained</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">onUpdate</span><span class="token punctuation">(</span><span class="token string">'cascade'</span><span class="token punctuation">)</span>
+      <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">onDelete</span><span class="token punctuation">(</span><span class="token string">'cascade'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Any additional  <a href="https://laravel.com/docs/8.x/migrations#column-modifiers">column modifiers</a>  must be called before the  <code>constrained</code>  method:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">foreignId</span><span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">)</span>
+      <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">nullable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">constrained</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="dropping-foreign-keys"><a href="https://laravel.com/docs/8.x/migrations#dropping-foreign-keys">Dropping Foreign Keys</a></h4>
+<p>To drop a foreign key, you may use the  <code>dropForeign</code>  method, passing the name of the foreign key constraint to be deleted as an argument. Foreign key constraints use the same naming convention as indexes. In other words, the foreign key constraint name is based on the name of the table and the columns in the constraint, followed by a “_foreign” suffix:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">dropForeign</span><span class="token punctuation">(</span><span class="token string">'posts_user_id_foreign'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Alternatively, you may pass an array containing the column name that holds the foreign key to the  <code>dropForeign</code>  method. The array will be converted to a foreign key constraint name using Laravel’s constraint naming conventions:</p>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">dropForeign</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'user_id'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+</div>
+</body>
+
+</html>
