@@ -153,7 +153,7 @@ $table->char('name', 100);
 #### [`enum()`](https://laravel.com/docs/8.x/migrations#column-method-enum)
 
 The  `enum`  method creates a  `ENUM`  equivalent column with the given valid values:
-
+بستخدم لما بدي استعمل نوع او اختيار بين شغليتن  مثلا نوع المستخدم 
 ```php
 $table->enum('difficulty', ['easy', 'hard']);
 ```
@@ -381,7 +381,9 @@ $table->foreignId('user_id')
       ->nullable()
       ->constrained();
 ```
-
+```php 
+$table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
+```
 #### [Dropping Foreign Keys](https://laravel.com/docs/8.x/migrations#dropping-foreign-keys)
 
 To drop a foreign key, you may use the  `dropForeign`  method, passing the name of the foreign key constraint to be deleted as an argument. Foreign key constraints use the same naming convention as indexes. In other words, the foreign key constraint name is based on the name of the table and the columns in the constraint, followed by a "_foreign" suffix:
@@ -396,3 +398,25 @@ Alternatively, you may pass an array containing the column name that holds the f
 $table->dropForeign(['user_id']);
 ```
 ___
+ملاحظات :
+-
+```php
+php artisan migrate
+```
+ - بتمشي بالترتيب من الاقدم إلى الاحدث وبتدور على يلي مالو معملو 
+migrate
+وبتعملو يعني إذا عندي واحد مالو معملو فبتعملوا
+ - أي جدول جوا قاعدة البيانات لازم يكون اسمه جمع
+ - لما بتعمل add column 
+ دوما ماتنسى تحط بال down drop column
+ - لوعندي مشكلة في الداتا بيز على اللوكال لما عم جرب بستعمل هي
+  ```php
+php artisan mi:f
+```
+ - ->cascadeOnDelete() ->cascadeOnUpdate()
+ أحذف الجدول او عدل إذا تم  حذف جدول المربوط معه
+ - مابصير العلاقة تكون من جدول أقدم مع جدول احدث بلارافل بتمشي من الأقدم للأحدُ في الانشاء حسب تاريخ migrate 
+يعني كيف بدي اعمل علاقة مع جدول مابعرفو ولالي مأنشؤو
+ - لارافل مابتعترف بأي جدول بنعمل من برا migrate
+
+ 

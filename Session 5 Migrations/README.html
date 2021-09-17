@@ -105,7 +105,8 @@ Schema<span class="token punctuation">:</span><span class="token punctuation">:<
 <pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">char</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h4 id="enum"><a href="https://laravel.com/docs/8.x/migrations#column-method-enum"><code>enum()</code></a></h4>
-<p>The  <code>enum</code>  method creates a  <code>ENUM</code>  equivalent column with the given valid values:</p>
+<p>The  <code>enum</code>  method creates a  <code>ENUM</code>  equivalent column with the given valid values:<br>
+بستخدم لما بدي استعمل نوع او اختيار بين شغليتن  مثلا نوع المستخدم</p>
 <pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">enum</span><span class="token punctuation">(</span><span class="token string">'difficulty'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'easy'</span><span class="token punctuation">,</span> <span class="token string">'hard'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h4 id="double"><a href="https://laravel.com/docs/8.x/migrations#column-method-double"><code>double()</code></a></h4>
@@ -333,6 +334,8 @@ Schema<span class="token punctuation">:</span><span class="token punctuation">:<
       <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">nullable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">constrained</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
+<pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">foreignId</span><span class="token punctuation">(</span><span class="token string">'user_id'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">references</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">cascadeOnDelete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h4 id="dropping-foreign-keys"><a href="https://laravel.com/docs/8.x/migrations#dropping-foreign-keys">Dropping Foreign Keys</a></h4>
 <p>To drop a foreign key, you may use the  <code>dropForeign</code>  method, passing the name of the foreign key constraint to be deleted as an argument. Foreign key constraints use the same naming convention as indexes. In other words, the foreign key constraint name is based on the name of the table and the columns in the constraint, followed by a “_foreign” suffix:</p>
 <pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">dropForeign</span><span class="token punctuation">(</span><span class="token string">'posts_user_id_foreign'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -341,6 +344,27 @@ Schema<span class="token punctuation">:</span><span class="token punctuation">:<
 <pre class=" language-php"><code class="prism  language-php"><span class="token variable">$table</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">dropForeign</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'user_id'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <hr>
+<h2 id="ملاحظات-">ملاحظات :</h2>
+<pre class=" language-php"><code class="prism  language-php">php artisan migrate
+</code></pre>
+<ul>
+<li>بتمشي بالترتيب من الاقدم إلى الاحدث وبتدور على يلي مالو معملو<br>
+migrate<br>
+وبتعملو يعني إذا عندي واحد مالو معملو فبتعملوا</li>
+<li>أي جدول جوا قاعدة البيانات لازم يكون اسمه جمع</li>
+<li>لما بتعمل add column<br>
+دوما ماتنسى تحط بال down drop column</li>
+<li>لوعندي مشكلة في الداتا بيز على اللوكال لما عم جرب بستعمل هي</li>
+</ul>
+<pre class=" language-php"><code class="prism  language-php">php artisan mi<span class="token punctuation">:</span>f
+</code></pre>
+<ul>
+<li>-&gt;cascadeOnDelete() -&gt;cascadeOnUpdate()<br>
+أحذف الجدول او عدل إذا تم  حذف جدول المربوط معه</li>
+<li>مابصير العلاقة تكون من جدول أقدم مع جدول احدث بلارافل بتمشي من الأقدم للأحدُ في الانشاء حسب تاريخ migrate<br>
+يعني كيف بدي اعمل علاقة مع جدول مابعرفو ولالي مأنشؤو</li>
+<li>لارافل مابتعترف بأي جدول بنعمل من برا migrate</li>
+</ul>
 </div>
 </body>
 
