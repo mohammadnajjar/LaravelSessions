@@ -10,10 +10,11 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+    //      Query Builder
     //   ! get
    public function index(){
 
-//   ! get all data table name by db class
+//   ! get all data (element) from table name by db class
 //       $users=DB::table('users')->get();
 //       return $users;
 
@@ -27,6 +28,7 @@ class UserController extends Controller
 //     return view('welcome',compact('users'));
 
 //   ! get data for one user
+//      $users = DB::table('users')->where('name', "Grover Fahey")->get();
 //       $users = DB::table('users')->where('id', 1)->get();
 //       return view('welcome',compact('users'));
 
