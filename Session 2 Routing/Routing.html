@@ -1,403 +1,461 @@
 ﻿<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>README</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome file</title>
-  <link rel="stylesheet" href="https://stackedit.io/style.css" />
-</head>
+  <body class="stackedit">
+    <div class="stackedit__html">
+      <blockquote>
+        <p>use App\Http\Controllers\HiController;</p>
+        <p>use App\Http\Controllers\UserController;</p>
+        <p>use App\Http\Controllers\Front\UsersController;</p>
+        <p>use App\Http\Controllers\Admin\AdminController;</p>
+        <p>use Illuminate\Support\Facades\Route;</p>
+        <p>
+          ** Web Routes**<br />
+          Here is where you can register web routes for your application.<br />
+          These<br />
+          routes are loaded by the RouteServiceProvider within a group which<br />
+          contains the “web” middleware group. Now create something great!
+        </p>
+      </blockquote>
+      <h1 id="route">// ! Route</h1>
+      <h1 id="basic-routing">// ! Basic Routing</h1>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-<body class="stackedit">
-  <div class="stackedit__html"><blockquote>
-<p>use App\Http\Controllers\HiController;</p>
-<p>use App\Http\Controllers\UserController;</p>
-<p>use App\Http\Controllers\Front\UsersController;</p>
-<p>use App\Http\Controllers\Admin\AdminController;</p>
-<p>use Illuminate\Support\Facades\Route;</p>
-<p>**  Web Routes**<br>
-Here is where you can register web routes for your application.<br>
-These<br>
-routes are loaded by the RouteServiceProvider within a group which<br>
-contains the “web” middleware group. Now create something great!</p>
-</blockquote>
-<h1 id="route">// ! Route</h1>
-<h1 id="basic-routing">// ! Basic Routing</h1>
-<pre><code>Route::get('/', function () {
+    <span class="token keyword">return</span>  <span class="token function">view</span><span class="token punctuation">(</span><span class="token string">'welcome'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-return  view('welcome');
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-});
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'greeting'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-Route::get('greeting', function () {
+    <span class="token keyword">return</span>  <span class="token string">'Hello World'</span><span class="token punctuation">;</span>
 
-return  'Hello World';
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-});
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'test1'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-Route::get('test1', function () {
+    <span class="token keyword">return</span>  <span class="token string">"test1"</span><span class="token punctuation">;</span>
 
-return  "test1";
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-});
+     Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
- Route::get('test', function () {
- 
- return view('test');
-});
+     <span class="token keyword">return</span> <span class="token function">view</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="ارسال-متغير-لل-view"><strong>ارسال متغير لل view</strong></h2>
-<pre><code>Route::get('test', function () {
+      <h2 id="ارسال-متغير-لل-view"><strong>ارسال متغير لل view</strong></h2>
+      <pre class="language-php"><code class="prism  language-php">
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-return  view('test', ['name' =&gt; 'James']);
+    <span class="token keyword">return</span>  <span class="token function">view</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'name'</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">'James'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-});
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
 </code></pre>
-<h2 id="controller-routing">// ! Controller Routing</h2>
-<pre><code>Route::get('hii', [UserController::class, 'index']);
+      <h2 id="controller-routing">// ! Controller Routing</h2>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'hii'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>UserController<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string">'index'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-Route::get('hi',[HiController::class , "index"]);
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'hi'</span><span class="token punctuation">,</span><span class="token punctuation">[</span>HiController<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">class</span> <span class="token punctuation">,</span> <span class="token string">"index"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>// ________________________________________________________________</p>
-<h2 id="available-router-methods">// ! Available Router Methods</h2>
-<pre><code>Route::get('hi',[HiController::class , "index"]);
 
-// Route::post('post', function () {
+      <h2 id="available-router-methods">// ! Available Router Methods</h2>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'hi'</span><span class="token punctuation">,</span><span class="token punctuation">[</span>HiController<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">class</span> <span class="token punctuation">,</span> <span class="token string">"index"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// return "users";
+    <span class="token comment">// Route::post('post', function () {</span>
 
-// });
+    <span class="token comment">// return "users";</span>
 
-// Route::put('put', function () {
+    <span class="token comment">// });</span>
 
-// return "users";
+    <span class="token comment">// Route::put('put', function () {</span>
 
-// });
+    <span class="token comment">// return "users";</span>
 
-// Route::patch("patch", function () {
+    <span class="token comment">// });</span>
 
-// return "users";
+    <span class="token comment">// Route::patch("patch", function () {</span>
 
-// });
+    <span class="token comment">// return "users";</span>
 
-// Route::delete("delete", function () {
+    <span class="token comment">// });</span>
 
-// return "users";
+    <span class="token comment">// Route::delete("delete", function () {</span>
 
-// });
+    <span class="token comment">// return "users";</span>
 
-// Route::options("options", function () {
+    <span class="token comment">// });</span>
 
-// return "users";
+    <span class="token comment">// Route::options("options", function () {</span>
 
-// });
+    <span class="token comment">// return "users";</span>
+
+    <span class="token comment">// });</span>
 </code></pre>
-<hr>
-<blockquote>
-<p>Sometimes you may need to register a route that responds to multiple<br>
-HTTP verbs.</p>
-<p>You may do so using the match method. Or,</p>
-<p>you may even register a route that responds to all HTTP verbs using<br>
-the any method:</p>
-<p>احيانا بنحتاج إلى راوت بستجيب للعديد من الافعال HTTP</p>
-<p>بنقدر نستخدم ونحدد فيها نوع الفعل يلي بدنا ياه get or post MATCH</p>
-<p>any او بنستخدم للأستجابة لكل الانواع</p>
-</blockquote>
-<pre><code>Route::match(['get', 'post'], 'match', function () {
+      <hr />
+      <blockquote>
+        <p>
+          Sometimes you may need to register a route that responds to
+          multiple<br />
+          HTTP verbs.
+        </p>
+        <p>You may do so using the match method. Or,</p>
+        <p>
+          you may even register a route that responds to all HTTP verbs using<br />
+          the any method:
+        </p>
+        <p>احيانا بنحتاج إلى راوت بستجيب للعديد من الافعال HTTP</p>
+        <p>بنقدر نستخدم ونحدد فيها نوع الفعل يلي بدنا ياه get or post MATCH</p>
+        <p>any او بنستخدم للأستجابة لكل الانواع</p>
+      </blockquote>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'get'</span><span class="token punctuation">,</span> <span class="token string">'post'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'match'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-return  "hello from match";
+    <span class="token keyword">return</span>  <span class="token string">"hello from match"</span><span class="token punctuation">;</span>
 
-});
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  
 
-Route::any('any', function () {
 
-return  "hello from any";
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">any</span><span class="token punctuation">(</span><span class="token string">'any'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-});
+    <span class="token keyword">return</span>  <span class="token string">"hello from any"</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 </code></pre>
-<h2 id="basic-routing-with-parameters">// ! Basic Routing with Parameters</h2>
-<blockquote>
-<h1 id="requer">// ! Requer</h1>
-</blockquote>
-<pre><code>Route::get('test2/{id}', function ($id) {
+      <h2 id="basic-routing-with-parameters">
+        // ! Basic Routing with Parameters
+      </h2>
+      <h2 id="requer">// ! Requer</h2>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'test2/{id}'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$id</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-return  $id;
+    <span class="token keyword">return</span>  <span class="token variable">$id</span><span class="token punctuation">;</span>
 
-});
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h1 id="not-requer"><code>// ! not Requer</code></h1>
-<pre><code>Route::get('test3/{id?}', function () {
+      <h1 id="not-requer"><code>// ! not Requer</code></h1>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'test3/{id?}'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-return  'welcome' ;
+    <span class="token keyword">return</span>  <span class="token string">'welcome'</span> <span class="token punctuation">;</span>
 
-});
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
+    <span class="token comment">// Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {</span>
 
-// return $postId ." " .$commentId;
+    <span class="token comment">// return $postId ." " .$commentId;</span>
 
-// });
+    <span class="token comment">// });</span>
 </code></pre>
-<hr>
-<h2 id="route-name">// ! Route name</h2>
-<blockquote>
-<p>بفيدني لما بدي اعمل اعادة توجيه للراوت او بدي ارجع استخدمو في الفيو<br>
-يعني لما بدي اكتبو جوا رابط مافي داعي اكتب المسار بتخصر بكتب فقط متل<br>
-المثال تحت داخل الفيو فهو يسمح بإنشاء عمليات إعادة توجيه ملائمة أو<br>
-انشاء مسار محدد</p>
-<p>ملاحظة:</p>
-<p>! اسم الراوت لازم يكون فريد مابصير يتكرر ابدا</p>
-<p>Route::get(…)-&gt;name(‘b’);</p>
-<p>#View code</p>
-<p><a href="{{ route('a') }}">show-number</a></p>
-<p><a href="{{ route('b') }}">show-string</a></p>
-</blockquote>
-<h1 id="route-code"><code>/ ? Route code</code></h1>
-<pre><code>Route::get('show-number', function () {
+      <hr />
+      <h2 id="route-name">// ! Route name</h2>
+      <blockquote>
+        <p>
+          بفيدني لما بدي اعمل اعادة توجيه للراوت او بدي ارجع استخدمو في الفيو<br />
+          يعني لما بدي اكتبو جوا رابط مافي داعي اكتب المسار بتخصر بكتب فقط
+          متل<br />
+          المثال تحت داخل الفيو فهو يسمح بإنشاء عمليات إعادة توجيه ملائمة أو<br />
+          انشاء مسار محدد
+        </p>
+        <p>ملاحظة:</p>
+        <p>! اسم الراوت لازم يكون فريد مابصير يتكرر ابدا</p>
+        <p>Route::get(…)-&gt;name(‘b’);</p>
+        <p>#View code</p>
+        <p><a href="{{ route('a') }}">show-number</a></p>
+        <p><a href="{{ route('b') }}">show-string</a></p>
+      </blockquote>
+      <h1 id="route-code"><code>/ ? Route code</code></h1>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'show-number'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-return  'show-number';
+    <span class="token keyword">return</span>  <span class="token string">'show-number'</span><span class="token punctuation">;</span>
 
-})-&gt;name('show-number');
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token string">'show-number'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-Route::get('show-string', function () {
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'show-string'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-return  'show-string';
+    <span class="token keyword">return</span>  <span class="token string">'show-string'</span><span class="token punctuation">;</span>
 
-})-&gt;name('show-string');
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token string">'show-string'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<hr>
-<h2 id="route-prefixes">// ! Route Prefixes</h2>
-<blockquote>
-<p>تستخدم لتحديد بادئة مجموعة</p>
-<p>الرابط رح يكون admin/users</p>
-<p>الفائدة بل ما اكتب قبل كل Route في المجموعة</p>
-<p>admin</p>
-<p>بكتبا مرة وحدة فوق من شان تبلش المجموعة كلا بنفس البادئة</p>
-<p>بستخدما لما بدي صفحات ما حدا يدخل عليها غير لما بكتب</p>
-<p>URL بأيدي</p>
-<p>متل الصفحات المهمة صفحات الادمن بشفر الرابطن تبعن</p>
-<p>يعني المجموعة كلا بتبش بنفس البداية</p>
-</blockquote>
-<pre><code>Route::prefix('admin')-&gt;group(function () {
+      <hr />
+      <h2 id="route-prefixes">// ! Route Prefixes</h2>
+      <blockquote>
+        <p>تستخدم لتحديد بادئة مجموعة</p>
+        <p>الرابط رح يكون admin/users</p>
+        <p>الفائدة بل ما اكتب قبل كل Route في المجموعة</p>
+        <p>admin</p>
+        <p>بكتبا مرة وحدة فوق من شان تبلش المجموعة كلا بنفس البادئة</p>
+        <p>بستخدما لما بدي صفحات ما حدا يدخل عليها غير لما بكتب</p>
+        <p>URL بأيدي</p>
+        <p>متل الصفحات المهمة صفحات الادمن بشفر الرابطن تبعن</p>
+        <p>يعني المجموعة كلا بتبش بنفس البداية</p>
+      </blockquote>
+      <pre class="language-php"><code class="prism  language-php">
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">prefix</span><span class="token punctuation">(</span><span class="token string">'admin'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-Route::get('users', function () {
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-// ! Matches The "/admin/users" URL
+    <span class="token comment">// ! Matches The "/admin/users" URL</span>
 
-return  "from prefix";
+    <span class="token keyword">return</span>  <span class="token string">"from prefix"</span><span class="token punctuation">;</span>
 
-})-&gt;name('users');
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-});
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 </code></pre>
-<hr>
-<h2 id="route-name-prefixes">// ! Route Name Prefixes</h2>
-<blockquote>
-<p>admin. بضيف لاسم كل الراوت قبلن</p>
-<p>حتى اسبق كل اسم مسار بسلسلة نصية معينة بدي كل المجموعة تبلش فيا</p>
-</blockquote>
-<pre><code>Route::name('admin.')-&gt;group(function () {
+      <hr />
+      <h2 id="route-name-prefixes">// ! Route Name Prefixes</h2>
+      <blockquote>
+        <p>admin. بضيف لاسم كل الراوت قبلن</p>
+        <p>حتى اسبق كل اسم مسار بسلسلة نصية معينة بدي كل المجموعة تبلش فيا</p>
+      </blockquote>
+      <pre class="language-php"><code class="prism  language-php">
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token string">'admin.'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-Route::get('users', function () {
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-// Route assigned name "admin.users"...
+    <span class="token comment">// Route assigned name "admin.users"...</span>
 
-return  "users";
+    <span class="token keyword">return</span>  <span class="token string">"users"</span><span class="token punctuation">;</span>
 
-})-&gt;name('users');
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-});
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<hr>
-<h2 id="routeresource">Route::resource</h2>
-<pre><code> Route::resource('news', 'NewsController');
+      <hr />
+      <h2 id="routeresource">Route::resource</h2>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">   Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">resource</span><span class="token punctuation">(</span><span class="token string">'news'</span><span class="token punctuation">,</span> <span class="token string">'NewsController'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<hr>
-<h2 id="route-namespace">// ! Route namespace</h2>
-<blockquote>
-<p>تعين مجال الأسماء الملف لكل راوت من الراوت الموجودة ضمن المجموعة</p>
-<p>Controllers بستخدم من شان اقسم ملقات</p>
-<p>route::namespace فلازم احط</p>
-<p>انو دير بالك هو موجود جوا مجلد يلي اسمو كذا</p>
-<p>اما بلارافل 8 بكفي اعمل ues</p>
-<p>use App\Http\Controllers\Admin\AdminController;</p>
-</blockquote>
-<pre><code>route::namespace('Front')-&gt;group(function ()
+      <hr />
+      <h2 id="route-namespace">// ! Route namespace</h2>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php"><span class="token operator">&gt;</span> تعين مجال الأسماء الملف لكل راوت من الراوت الموجودة ضمن المجموعة
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> Controllers بستخدم من شان اقسم ملقات
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">namespace</span> فلازم احط
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> انو دير بالك هو موجود جوا مجلد يلي اسمو كذا
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> اما بلارافل <span class="token number">8</span> بكفي اعمل ues
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> <span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Controllers<span class="token punctuation">\</span>Admin<span class="token punctuation">\</span>AdminController</span><span class="token punctuation">;</span>
 
-{
 
-// ! all Route only access controller or methods in folder name Front (F) cabital
+  route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">namespace</span><span class="token punctuation">(</span><span class="token string">'Front'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-Route::get('welcome', function () {
+  <span class="token punctuation">{</span>
 
-return  'welcome';
+  <span class="token comment">// ! all Route only access controller or methods in folder name Front (F) cabital</span>
 
-});
+  Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'welcome'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-Route::get('FrontUsers', [UsersController::class, 'index']);  }
+  <span class="token keyword">return</span>  <span class="token string">'welcome'</span><span class="token punctuation">;</span>
+
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'FrontUsers'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>UsersController<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string">'index'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span>
+
+<span class="token operator">&gt;</span>   Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">namespace</span><span class="token punctuation">(</span><span class="token string">'Admin'</span><span class="token punctuation">)</span> <span class="token operator">==</span> Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'namespace'</span><span class="token operator">=</span><span class="token operator">&gt;</span><span class="token string">'Admin'</span><span class="token punctuation">]</span>
+
+
+  <span class="token comment">// Route::namespace('Admin')-&gt;group(function () {</span>
+
+  <span class="token comment">// ! Controllers Within The "App\Http\Controllers\Admin" Namespace</span>
+
+  <span class="token comment">// Route::get('Admins', [AdminController::class, 'index'])-&gt;name('Admins');</span>
+
+  <span class="token comment">// });</span>
+
+
+
+  Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'namespace'</span><span class="token operator">=</span><span class="token operator">&gt;</span><span class="token string">'Admin'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+  <span class="token comment">// ! Controllers Within The "App\Http\Controllers\Admin" Namespace</span>
+
+  Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'Admins'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>AdminController<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string">'index'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token string">'Admins'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'admin'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>AdminController<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string">'index'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'hiAdmin'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>AdminController<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string">'index'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">prefix</span><span class="token punctuation">(</span><span class="token string">'Admin'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'prefixAdmins'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>AdminController<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string">'index'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token string">'prefixAdmins'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<blockquote>
-<p>Route::namespace(‘Admin’) == Route::group([‘namespace’=&gt;‘Admin’]</p>
-</blockquote>
-<pre><code>// Route::namespace('Admin')-&gt;group(function () {
+      <hr />
+      <h2 id="route-middleware">// ! Route middleware</h2>
+      <blockquote>
+        <p>أي راوت جوا هل غروب كابصير يدخل عليه حدا إذا مالو مسجل دخول</p>
+        <p>web الافتراضي يعني أي احد داخل بدون تسجيل او الضيف</p>
+        <p>auth يعني يوزر عضو مسجل</p>
+        <p>auth:web يعني يوزر عضو مسجل</p>
+      </blockquote>
+      <pre class="language-php"><code class="prism  language-php">
+  <span class="token comment">// Route::middleware(['auth'])-&gt;group(function () {</span>
 
-// ! Controllers Within The "App\Http\Controllers\Admin" Namespace
+  <span class="token comment">// Route::get('user/profile', function () {</span>
 
-// Route::get('Admins', [AdminController::class, 'index'])-&gt;name('Admins');
+  <span class="token comment">// return "hiiii";</span>
 
-// });
+  <span class="token comment">// });</span>
 
-  
+  <span class="token comment">// });</span>
 
-Route::group(['namespace'=&gt;'Admin'],function(){
+  <span class="token comment">// Route::middleware(['first', 'second'])-&gt;group(function () {</span>
 
-// ! Controllers Within The "App\Http\Controllers\Admin" Namespace
+  <span class="token comment">// Route::get('/', function () {</span>
 
-Route::get('Admins', [AdminController::class, 'index'])-&gt;name('Admins');
+  <span class="token comment">// // Uses first &amp; second middleware...</span>
 
-Route::get('admin', [AdminController::class, 'index']);
+  <span class="token comment">// });</span>
 
-Route::get('hiAdmin', [AdminController::class, 'index']);
 
-});
 
-Route::prefix('Admin')-&gt;group(function () {
+  <span class="token comment">// Route::get('/user/profile', function () {</span>
 
-Route::get('prefixAdmins', [AdminController::class, 'index'])-&gt;name('prefixAdmins');
+  <span class="token comment">// // Uses first &amp; second middleware...</span>
 
-});
+  <span class="token comment">// });</span>
+
+  <span class="token comment">// });</span>
+
+
+
+  <span class="token comment">// Route::get('check', function () {</span>
+
+  <span class="token comment">// return 'middleware';</span>
+
+  <span class="token comment">// })-&gt;middleware('auth');</span>
+
+
 </code></pre>
-<hr>
-<h2 id="route-middleware">// ! Route middleware</h2>
-<blockquote>
-<p>أي راوت جوا هل غروب كابصير يدخل عليه حدا إذا مالو مسجل دخول</p>
-<p>web الافتراضي يعني أي احد داخل بدون تسجيل او الضيف</p>
-<p>auth يعني يوزر عضو مسجل</p>
-<p>auth:web يعني يوزر عضو مسجل</p>
-</blockquote>
-<pre><code>// Route::middleware(['auth'])-&gt;group(function () {
+      <hr />
+      <h2 id="route-send-data-to-view">// ! Route Send Data to view</h2>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'send/{id}'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$id</span><span class="token punctuation">)</span>
 
-// Route::get('user/profile', function () {
+    <span class="token punctuation">{</span>
 
-// return "hiiii";
+    <span class="token keyword">return</span>  <span class="token function">view</span><span class="token punctuation">(</span><span class="token string">'send'</span><span class="token punctuation">,</span><span class="token function">Compact</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// });
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// });
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'sd'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-// Route::middleware(['first', 'second'])-&gt;group(function () {
+    <span class="token punctuation">{</span>
 
-// Route::get('/', function () {
+    <span class="token keyword">return</span>  <span class="token function">view</span><span class="token punctuation">(</span><span class="token string">'send'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">with</span><span class="token punctuation">(</span><span class="token string">'data'</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// // Uses first &amp; second middleware...
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// });
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'sd1'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-  
+    <span class="token punctuation">{</span>
 
-// Route::get('/user/profile', function () {
+    <span class="token keyword">return</span>  <span class="token function">view</span><span class="token punctuation">(</span><span class="token string">'send'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">with</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'string'</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">"hi"</span><span class="token punctuation">,</span><span class="token string">"int"</span><span class="token operator">=</span><span class="token operator">&gt;</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// // Uses first &amp; second middleware...
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// });
+    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'sd11'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-// });
+    <span class="token punctuation">{</span>
 
-  
+    <span class="token keyword">return</span>  <span class="token function">view</span><span class="token punctuation">(</span><span class="token string">'send'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// Route::get('check', function () {
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// return 'middleware';
-
-// })-&gt;middleware('auth');
 </code></pre>
-<hr>
-<h2 id="route-send-data-to-view">// ! Route Send Data to view</h2>
-<pre><code>Route::get('send/{id}', function ($id)
+      <hr />
+      <h2 id="route-group">// ! Route group</h2>
+      <blockquote>
+        <p>يسمح في مشاركة خواص الراوت مثل</p>
+        <p>prefix,middleware,namespace</p>
+        <p>على عدد كبير من الراوت داخل غروب بدل كتابة نوع الخاصية لكل راوت</p>
+        <p>كما يمكن دمج اكثر من خاصية معا</p>
+        <p>إذا خاصية وحدة لازم بلش فيا</p>
+      </blockquote>
+      <pre class="language-php"><code class="prism  language-php">
+    <span class="token comment">// Route::group(['prefix' =&gt; 'users','middleware' =&gt; 'auth'],function()</span>
 
-{
+    <span class="token comment">// {</span>
 
-return  view('send',Compact('id'));
+    <span class="token comment">// Route::get('/', function () {</span>
 
-});
+    <span class="token comment">// return 'work';</span>
 
-Route::get('sd', function ()
+    <span class="token comment">// });</span>
 
-{
+    <span class="token comment">// Route::get('show', function () {</span>
 
-return  view('send')-&gt;with('data',2);
+    <span class="token comment">// return 'show';</span>
 
-});
+    <span class="token comment">// });</span>
 
-Route::get('sd1', function ()
+    <span class="token comment">// Route::delete('delete', 'UsersController@showAdminName');</span>
 
-{
+    <span class="token comment">// Route::get('show', 'UsersController@showAdminName');</span>
 
-return  view('send')-&gt;with(['string' =&gt; "hi","int"=&gt;5] );
+    <span class="token comment">// Route::get('edit', 'UsersController@showAdminName');</span>
 
-});
+    <span class="token comment">// Route::put('update', 'UsersController@showAdminName');</span>
 
-Route::get('sd11', function ()
+    <span class="token comment">// });</span>
 
-{
 
-return  view('send');
-
-});
 </code></pre>
-<hr>
-<h2 id="route-group">// ! Route group</h2>
-<blockquote>
-<p>يسمح في مشاركة خواص الراوت مثل</p>
-<p>prefix,middleware,namespace</p>
-<p>على عدد كبير من الراوت داخل غروب بدل كتابة نوع الخاصية لكل راوت</p>
-<p>كما يمكن دمج اكثر من خاصية معا</p>
-<p>إذا خاصية وحدة لازم بلش فيا</p>
-</blockquote>
-<pre><code>// Route::group(['prefix' =&gt; 'users','middleware' =&gt; 'auth'],function()
+      <hr />
+      <pre
+        class="language-php"
+      ><code class="prism  language-php"><span class="token operator">&gt;</span> RouteAdmin لازم افصل
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> عن المستخدمين من شان اقسمن اول شي بنشىء ملف للراوت بعدا بروح على
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> RouteServiceProvider بعدل فيه بضيف
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">middleware</span><span class="token punctuation">(</span><span class="token string">'web'</span><span class="token punctuation">)</span>
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token keyword">namespace</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token keyword">namespace</span><span class="token punctuation">)</span>
+<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token function">base_path</span><span class="token punctuation">(</span><span class="token string">'routes/admin.php'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-// {
-
-// Route::get('/', function () {
-
-// return 'work';
-
-// });
-
-// Route::get('show', function () {
-
-// return 'show';
-
-// });
-
-// Route::delete('delete', 'UsersController@showAdminName');
-
-// Route::get('show', 'UsersController@showAdminName');
-
-// Route::get('edit', 'UsersController@showAdminName');
-
-// Route::put('update', 'UsersController@showAdminName');
-
-// });
 </code></pre>
-<hr>
-<blockquote>
-<p>RouteAdmin لازم افصل</p>
-<p>عن المستخدمين من شان اقسمن اول شي بنشىء ملف للراوت بعدا بروح على</p>
-<p>RouteServiceProvider بعدل فيه بضيف</p>
-<p>Route::middleware(‘web’)</p>
-<p>-&gt;namespace($this-&gt;namespace)</p>
-<p>-&gt;group(base_path(‘routes/admin.php’));</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>// ! Route view</p>
-</blockquote>
-<pre><code>Route::view('URI', 'send');
+      <hr />
+      <blockquote>
+        <p>// ! Route view</p>
+      </blockquote>
+      <pre
+        class="language-php"
+      ><code class="prism  language-php">    Route<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">view</span><span class="token punctuation">(</span><span class="token string">'URI'</span><span class="token punctuation">,</span> <span class="token string">'send'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-</div>
-</body>
-
+    </div>
+  </body>
 </html>

@@ -1,0 +1,19 @@
+  * {
+        color: #fff;
+      }
+      body {
+        background: #082032;
+        color: #fff;
+      }
+      pre {
+        background: #2c394b;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      strong {
+        color: #ff4c29;
+      }
